@@ -1,6 +1,7 @@
 import tensorflow as tf
 from data_loader import StreetViewDataset
 from model import create_model
+from os import makedirs
 
 # Set parameters
 data_dir = 'organized_data/train'
@@ -25,5 +26,8 @@ model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=1e-5),
 # Continue training for a few more epochs to fine tune
 model.fit(train_dataset, epochs=5)
 
-# Save the model weights
-model.save_weights('geoguessr_v1.weights.h5')
+# Make sure the models folder exists
+makedirs('models', exist_ok=True)
+
+# Save the model weights 
+model.save_weights('models/geoguessr_v1.weights.h5')
